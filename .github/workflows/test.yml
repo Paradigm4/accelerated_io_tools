@@ -13,6 +13,8 @@ jobs:
       ports:
         - 8080:8080
         - 8083:8083
+      env:
+        - ARROW_VER=3.0.0
 
     strategy:
       matrix:
