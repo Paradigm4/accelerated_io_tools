@@ -6,6 +6,7 @@ wget -O- https://paradigm4.github.io/extra-scidb-libs/install.sh \
 |  sh -s -- --only-prereq
 
 id=`lsb_release --id --short`
+dir=$(dirname $0)/..
 
 # Install prerequisites
 PYTHON=python3
@@ -55,7 +56,7 @@ fi
 
 # Compile and install plugin
 scidbctl.py stop $SCIDB_NAME
-make
-cp libaccelerated_io_tools.so $SCIDB_INSTALL_PATH/lib/scidb/plugins/
+make --directory=$dir
+cp $dir/libaccelerated_io_tools.so $SCIDB_INSTALL_PATH/lib/scidb/plugins/
 scidbctl.py start $SCIDB_NAME
 iquery --afl --query "load_library('accelerated_io_tools')"
