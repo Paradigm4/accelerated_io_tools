@@ -15,6 +15,7 @@ jobs:
         image: ghcr.io/rvernica/scidb:19.11-${{ matrix.image }}
         volumes:
           - /dev/shm
+          - /home/runner/work:/__w
         ports:
           - 8080:8080
           - 8083:8083
@@ -33,6 +34,15 @@ jobs:
     #   options: --init
 
     steps:
+      - name: Check Docker workdir
+        run: docker exec scidb pwd
+
+      - name: Check Docker workdir
+        run: docker exec scidb ls /__w
+
+      - name: Wait for SciDB to start
+        run: while ! curl http://localhost:8080/version; do sleep 5; done
+
       - name: Check out repository
         uses: actions/checkout@v2
 
