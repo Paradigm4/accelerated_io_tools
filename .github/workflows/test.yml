@@ -21,6 +21,7 @@ jobs:
           - 8083:8083
         env:
           ARROW_VER: 3.0.0
+        options: --name scidb
 
     # container:
     #   image: ghcr.io/rvernica/scidb:19.11-${{ matrix.image }}
