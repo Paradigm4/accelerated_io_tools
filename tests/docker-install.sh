@@ -10,10 +10,7 @@ id=`lsb_release --id --short`
 # Install prerequisites
 if [ "$id" = "CentOS" ]
 then
-    # yum install --assumeyes                                                    \
-    #     https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
-
-    for pkg in arrow-devel-$ARROW_VER centos-release-scl libpqxx-devel python27
+    for pkg in centos-release-scl libpqxx-devel
     do
         yum install --assumeyes $pkg
     done
