@@ -27,8 +27,11 @@ jobs:
       - name: Set-up Docker container
         run: tests/docker-install.sh
 
-      - name: Run tests
-        run: |
-          tests/test.sh
-          tests/test-skip.sh
-          tests/test_arrow.sh
+      - name: Run tests 1/3
+        run: tests/test.sh
+
+      - name: Run tests 2/3
+        run: tests/test-skip.sh
+
+      - name: Run tests 3/3
+        run: tests/test_arrow.sh
