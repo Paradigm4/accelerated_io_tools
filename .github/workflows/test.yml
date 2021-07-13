@@ -63,5 +63,8 @@ jobs:
           docker exec scidb
           /__w/accelerated_io_tools/accelerated_io_tools/tests/test_arrow.sh
 
+      - name: Setup client
+        run: pip install scidb-py
+
       - name: Run tests from client
         run: ./tests/test_arrow.sh "docker exec scidb"
