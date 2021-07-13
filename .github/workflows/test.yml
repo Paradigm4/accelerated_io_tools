@@ -2,20 +2,18 @@ name: Test Suite
 
 on: [push]
 
-env:
-  SCIDB_VER: 19.11
-
 jobs:
   test:
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        image: [xenial, centos-7]
+        SCIDB_VER: [19.11]
+        OS: [xenial, centos-7]
 
     services:
       scidb:
-        image: ghcr.io/rvernica/scidb:${{ env.SCIDB_VER }}-${{ matrix.image }}
+        image: ghcr.io/rvernica/scidb:${{ matrix.SCIDB_VER }}-${{ matrix.OS }}
         volumes:
           - /dev/shm
           - /home/runner/work:/__w
@@ -30,12 +28,12 @@ jobs:
       - name: Start SciDB in CentOS-7
         run: >-
           docker exec scidb
-          /opt/scidb/${{ env.SCIDB_VER }}/bin/scidbctl.py start scidb
-        if: ${{ matrix.image == 'centos-7' }}
+          /opt/scidb/${{ matrix.SCIDB_VER }}/bin/scidbctl.py start scidb
+        if: ${{ matrix.OS == 'centos-7' }}
 
       - name: Start Shim in CentOS-7
         run: docker exec scidb systemctl start shimsvc
-        if: ${{ matrix.image == 'centos-7' }}
+        if: ${{ matrix.OS == 'centos-7' }}
 
       - name: Wait for SciDB to start
         run: while ! curl http://localhost:8080/version; do sleep 5; done
