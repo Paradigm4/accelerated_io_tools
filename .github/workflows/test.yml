@@ -30,11 +30,11 @@ jobs:
         run: >-
           docker exec scidb
           /opt/scidb/${{ env.SCIDB_VER }}/bin/scidbctl.py start scidb
-        if: matrix.image == "centos-7"
+        if: ${{ matrix.image == 'centos-7' }}
 
       - name: Start Shim in CentOS-7
         run: docker exec scidb systemctl start shimsvc
-        if: matrix.image == "centos-7"
+        if: ${{ matrix.image == 'centos-7' }}
 
       - name: Wait for SciDB to start
         run: while ! curl http://localhost:8080/version; do sleep 5; done
