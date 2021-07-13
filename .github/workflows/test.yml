@@ -10,32 +10,43 @@ jobs:
       matrix:
         image: [xenial, centos-7]
 
-    container:
-      image: ghcr.io/rvernica/scidb:19.11-${{ matrix.image }}
-      volumes:
-        - /dev/shm
-      ports:
-        - 8080:8080
-        - 8083:8083
-      env:
-        ARROW_VER: 3.0.0
-      options: --entrypoint /docker-entrypoint.sh
+    services:
+      scidb:
+        image: ghcr.io/rvernica/scidb:19.11-${{ matrix.image }}
+        volumes:
+          - /dev/shm
+        ports:
+          - 8080:8080
+          - 8083:8083
+        env:
+          ARROW_VER: 3.0.0
+
+    # container:
+    #   image: ghcr.io/rvernica/scidb:19.11-${{ matrix.image }}
+    #   volumes:
+    #     - /dev/shm
+    #   ports:
+    #     - 8080:8080
+    #     - 8083:8083
+    #   env:
+    #     ARROW_VER: 3.0.0
+    #   options: --init
 
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
 
-      - name: Start-up Services and SciDB in Docker container
-        run: /docker-entrypoint.sh echo
+      # - name: Start-up Services and SciDB in Docker container
+      #   run: /docker-entrypoint.sh echo
 
-      - name: Set-up Docker container
-        run: tests/docker-install.sh
+      # - name: Set-up Docker container
+      #   run: tests/docker-install.sh
 
-      - name: Run tests 1/3
-        run: tests/test.sh
+      # - name: Run tests 1/3
+      #   run: tests/test.sh
 
-      - name: Run tests 2/3
-        run: tests/test-skip.sh
+      # - name: Run tests 2/3
+      #   run: tests/test-skip.sh
 
-      - name: Run tests 3/3
-        run: tests/test_arrow.sh
+      # - name: Run tests 3/3
+      #   run: tests/test_arrow.sh
