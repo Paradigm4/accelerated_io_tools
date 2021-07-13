@@ -6,8 +6,12 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        image: [xenial, centos-7]
+
     container:
-      image: ghcr.io/rvernica/scidb:19.11-xenial
+      image: ghcr.io/rvernica/scidb:19.11-${{ marix.image }}
       volumes:
         - /dev/shm
       ports:
