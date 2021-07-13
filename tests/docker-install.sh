@@ -8,14 +8,13 @@ wget -O- https://paradigm4.github.io/extra-scidb-libs/install.sh \
 id=`lsb_release --id --short`
 
 # Install prerequisites
+PYTHON=python3
 if [ "$id" = "CentOS" ]
 then
-    for pkg in centos-release-scl libpqxx-devel
+    for pkg in centos-release-scl libpqxx-devel python3
     do
         yum install --assumeyes $pkg
     done
-
-    source /opt/rh/python27/enable
 else
     apt-get install --assume-yes --no-install-recommends        \
             software-properties-common
@@ -25,11 +24,12 @@ else
             libarrow-dev=$ARROW_VER-1                           \
             libpqxx-dev                                         \
             python3.7
+    PYTHON=python3.7
 fi
 
 
 wget --no-verbose https://bootstrap.pypa.io/get-pip.py
-python3.7 get-pip.py
+$PYTHON get-pip.py
 pip install --upgrade scidb-py
 
 
