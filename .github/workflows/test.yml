@@ -16,10 +16,6 @@ jobs:
       env:
         ARROW_VER: 3.0.0
 
-    strategy:
-      matrix:
-        python-version: [3.6, 3.7, 3.8, 3.9]
-
     steps:
       # - name: Wait for SciDB to start
       #   run: while ! curl http://localhost:8080/version; do sleep 5; done
