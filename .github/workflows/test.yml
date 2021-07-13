@@ -17,11 +17,15 @@ jobs:
         ARROW_VER: 3.0.0
 
     steps:
-      # - name: Wait for SciDB to start
-      #   run: while ! curl http://localhost:8080/version; do sleep 5; done
-
       - name: Check out repository
         uses: actions/checkout@v2
+
+      - name: Start-up Services and SciDB in Docker container
+        run: |
+          service ssh start
+          service postgresql start
+          $SCIDB_INSTALL_PATH/bin/scidbctl.py start $SCIDB_NAME
+          service shimsvc start
 
       - name: Set-up Docker container
         run: tests/docker-install.sh
