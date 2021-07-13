@@ -20,16 +20,19 @@ then
 
     source /opt/rh/python27/enable
 else
+    apt-get install --assume-yes --no-install-recommends        \
+            software-properties-common
+    add-apt-repository --yes ppa:deadsnakes/ppa
     apt-get update
-    apt-get install                              \
-            --assume-yes --no-install-recommends \
-            libarrow-dev=$ARROW_VER-1            \
-            libpqxx-dev
+    apt-get install --assume-yes --no-install-recommends        \
+            libarrow-dev=$ARROW_VER-1                           \
+            libpqxx-dev                                         \
+            python3.7
 fi
 
 
 wget --no-verbose https://bootstrap.pypa.io/get-pip.py
-python get-pip.py
+python3.7 get-pip.py
 pip install --upgrade scidb-py
 
 
