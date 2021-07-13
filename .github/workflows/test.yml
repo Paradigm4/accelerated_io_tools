@@ -2,11 +2,12 @@ name: Test Suite
 
 on: [push]
 
+env:
+  SCIDB_VER: 19.11
+
 jobs:
   test:
     runs-on: ubuntu-latest
-    env:
-      SCIDB_VER: 19.11
 
     strategy:
       matrix:
