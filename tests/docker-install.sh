@@ -58,8 +58,7 @@ fi
 
 # Compile and install plugin
 scidbctl.py stop $SCIDB_NAME
-make --directory accelerated_io_tools
-cp accelerated_io_tools/libaccelerated_io_tools.so     \
-   $SCIDB_INSTALL_PATH/lib/scidb/plugins/
+make
+cp libaccelerated_io_tools.so $SCIDB_INSTALL_PATH/lib/scidb/plugins/
 scidbctl.py start $SCIDB_NAME
 iquery --afl --query "load_library('accelerated_io_tools')"
