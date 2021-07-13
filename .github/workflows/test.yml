@@ -11,7 +11,7 @@ jobs:
         image: [xenial, centos-7]
 
     container:
-      image: ghcr.io/rvernica/scidb:19.11-${{ marix.image }}
+      image: ghcr.io/rvernica/scidb:19.11-${{ matrix.image }}
       volumes:
         - /dev/shm
       ports:
