@@ -19,7 +19,7 @@ jobs:
         - 8083:8083
       env:
         ARROW_VER: 3.0.0
-      options: --init
+      options: --entrypoint /docker-entrypoint.sh
 
     steps:
       - name: Check out repository
