@@ -294,5 +294,5 @@ $PYTHON -c "import pyarrow; print(pyarrow.ipc.open_stream(open('$F', 'rb')).read
 
 sed --in-place 's/ instance: s0-.*//' $TEST_OUT
 
-diff --ignore-all-space $TEST_OUT $DIR/test_arrow.expected.py
+diff --ignore-all-space $TEST_OUT $DIR/test_arrow.expected
 rm $TEST_OUT
