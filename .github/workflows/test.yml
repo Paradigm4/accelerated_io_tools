@@ -22,11 +22,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Start-up Services and SciDB in Docker container
-        run: |
-          service ssh start
-          service postgresql start
-          $SCIDB_INSTALL_PATH/bin/scidbctl.py start $SCIDB_NAME
-          service shimsvc start
+        run: /docker-entrypoint.sh echo
 
       - name: Set-up Docker container
         run: tests/docker-install.sh
