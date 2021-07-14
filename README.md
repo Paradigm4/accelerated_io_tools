@@ -3,7 +3,7 @@ accelerated_io_tools
 
 [![SciDB 19.11](https://img.shields.io/badge/SciDB-19.11-blue.svg)](https://forum.paradigm4.com/t/scidb-release-19-11/2411)
 [![arrow 3.0.0](https://img.shields.io/badge/arrow-3.0.0-blue.svg)](https://arrow.apache.org/release/3.0.0.html)
-[![Build Status](https://travis-ci.org/Paradigm4/accelerated_io_tools.svg)](https://travis-ci.org/Paradigm4/accelerated_io_tools)
+[![Build Status](https://github.com/Paradigm4/SciDB-Py/actions/workflows/test.yml/badge.svg)](https://github.com/Paradigm4/accelerated_io_tools/actions/workflows/test.yml)
 
 A prototype library for the accelerated import and export of data out of SciDB. The work started previously as the `prototype_load_tools` package and continued to get optimized and expanded. Currently contains two SciDB operators and several functions:
  * `aio_input`: an operator that reads token-separated text from 1 or more filesystem objects and returns the data as a SciDB array

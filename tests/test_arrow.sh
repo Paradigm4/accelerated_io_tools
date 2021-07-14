@@ -6,15 +6,16 @@ DIR=`dirname $0`
 TEST_OUT=$DIR/test_arrow.out
 IQ="$1 iquery --afl --query"
 F=/tmp/1
-PYTHON=python
-PYTHON_VERSION=$($PYTHON -c "import sys; print(sys.version_info[0])")
+
+PYTHON=python3
+if [ -e "/usr/bin/python3.7" ]
+then
+    PYTHON=python3.7
+fi
 
 function iq() {
     $IQ "$1" >> $TEST_OUT
 }
-
-# Load Python 2.7 (CentOS only)
-source /opt/rh/python27/enable 2> /dev/null || :
 
 : > $TEST_OUT                   # Reset output file
 
@@ -293,5 +294,5 @@ $PYTHON -c "import pyarrow; print(pyarrow.ipc.open_stream(open('$F', 'rb')).read
 
 sed --in-place 's/ instance: s0-.*//' $TEST_OUT
 
-diff --ignore-all-space $TEST_OUT $DIR/test_arrow.expected.py$PYTHON_VERSION
+diff --ignore-all-space $TEST_OUT $DIR/test_arrow.expected
 rm $TEST_OUT
