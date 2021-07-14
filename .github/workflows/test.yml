@@ -10,6 +10,7 @@ jobs:
       matrix:
         SCIDB_VER: [19.11]
         OS: [xenial, centos-7]
+        python-version: [3.6, 3.7, 3.8, 3.9]
 
     services:
       scidb:
@@ -28,6 +29,17 @@ jobs:
         options: --name scidb
 
     steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Setup client
+        run: pip install scidb-py
+
       - name: Start SciDB in CentOS-7
         run: >-
           docker exec scidb
@@ -40,9 +52,6 @@ jobs:
 
       - name: Wait for SciDB to start
         run: while ! curl http://localhost:8080/version; do sleep 5; done
-
-      - name: Check out repository
-        uses: actions/checkout@v2
 
       - name: Set-up Docker container
         run: >-
@@ -63,9 +72,6 @@ jobs:
         run: >-
           docker exec scidb
           /__w/accelerated_io_tools/accelerated_io_tools/tests/test_arrow.sh
-
-      - name: Setup client
-        run: pip install scidb-py
 
       - name: Run tests from client
         run: ./tests/test_arrow.sh "docker exec scidb"
