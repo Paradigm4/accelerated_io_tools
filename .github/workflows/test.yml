@@ -19,6 +19,7 @@ jobs:
           - /home/runner/work:/__w
           - /sys/fs/cgroup:/sys/fs/cgroup
           - /tmp/$(mktemp --directory):/run
+          - /tmp:/tmp
         ports:
           - 8080:8080
           - 8083:8083
